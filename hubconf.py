@@ -23,7 +23,7 @@ def _make_entrypoint(model_config, repository_id):
         )
 
     entrypoint.__doc__ = (
-        f"Load {model_config['hub_name']} "
+        f"Load {model_config['alias']} "
         f"from {repository_id}."
     )
     return entrypoint
@@ -41,7 +41,7 @@ def _register_models():
         base_prefix = publisher + str(publication_year)[-2:] + author_initials
 
         for model in repo.get("models", []):
-            name = f"{base_prefix}_{model['hub_alias']}"
+            name = f"{base_prefix}_{model['alias']}"
 
             if not name.isidentifier():
                 raise ValueError(

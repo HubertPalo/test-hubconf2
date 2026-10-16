@@ -10,7 +10,7 @@ repositories:
     - parameter_name: role
     - parameter_name: head
     models:
-      - hub_alias: LFR_T2V_MS
+      - alias: LFR_T2V_MS
         entrypoint: lfr_ts2vec_ms
     # - model_id: diet_resnetse5_kh
     # - model_id: diet_resnetse5_uci
