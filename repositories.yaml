@@ -1,0 +1,28 @@
+- repository_id: H-IAAC/benchmarking-encoders-ssl-har
+  repository_description: Encoders for the paper "asd"
+  publisher: IEEEAccess
+  publication_year: 2026
+  author_id: Gustavo P. C. P. da Luz (GL)
+  tag: benchmarking-encoders
+  title: Benchmarking Encoders and Self-Supervised Learning for Smartphone-Based Human Activity Recognition
+  extra_parameters:
+  - parameter_name: role
+  - parameter_name: head
+  models:
+  - model_id: diet_resnetse5_kh
+  - model_id: diet_resnetse5_uci
+  - model_id: lfr_imutransformer_kh
+  - model_id: lfr_imutransformer_rwthigh
+  - model_id: lfr_imutransformer_rwwaist
+  - model_id: lfr_resnetse5_ms
+  - model_id: lfr_ts2vec_ms
+  - model_id: lfr_tstcc_ms
+  - model_id: lfr_tstcc_rwthigh
+  - model_id: tfc_cnnpff_kh
+  - model_id: tfc_cnnpff_ms
+  - model_id: tfc_cnnpff_rwthigh
+  - model_id: tfc_cnnpff_rwwaist
+  - model_id: tfc_cnnpff_uci
+  - model_id: tfc_cnnpff_wisdm
+  - model_id: tfc_imutransformer_ms
+  
