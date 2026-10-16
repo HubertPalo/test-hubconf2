@@ -1,57 +1,53 @@
-from pathlib import Path
+from pathlib import Path as _Path
 
-import torch
-import yaml
+import torch as _torch
+import yaml as _yaml
 
 dependencies = ["torch", "pyyaml"]
 
-CONFIG_PATH = Path(__file__).parent / "repositories.yaml"
+_CONFIG_PATH = _Path(__file__).parent / "repositories.yaml"
 
 
-def _load_models():
-    with CONFIG_PATH.open("r", encoding="utf-8") as f:
-        config = yaml.safe_load(f) or {}
-
-    models = {}
-
-    for repo in config.get("repositories", []):
-        for model in repo.get("models", []):
-            name = model["hub_name"]
-
-            if name in models:
-                raise ValueError(
-                    f"Identificador duplicado: {name}"
-                )
-
-            models[name] = {
-                **model,
-                "repository_id": repo["repository_id"],
-            }
-
-    return models
+def _load_config():
+    with _CONFIG_PATH.open(encoding="utf-8") as f:
+        return _yaml.safe_load(f) or {}
 
 
-def __getattr__(name):
-    models = _load_models()
-
-    if name not in models:
-        raise AttributeError(
-            f"Modelo no registrado en el hub: {name}"
-        )
-
-    config = models[name]
-
-    def load(pretrained=True, **kwargs):
-        return torch.hub.load(
-            config["repository_id"],
-            config["entrypoint"],
+def _make_entrypoint(model_config, repository_id):
+    def entrypoint(pretrained=True, **kwargs):
+        return _torch.hub.load(
+            repository_id,
+            model_config["entrypoint"],
             pretrained=pretrained,
             **kwargs,
         )
 
-    load.__name__ = name
-    load.__doc__ = (
-        f"Carga {name} desde {config['repository_id']}."
+    entrypoint.__doc__ = (
+        f"Load {model_config['hub_name']} "
+        f"from {repository_id}."
     )
+    return entrypoint
 
-    return load
+
+def _register_models():
+    config = _load_config()
+
+    for repo in config.get("repositories", []):
+        repository_id = repo["repository_id"]
+
+        for model in repo.get("models", []):
+            name = model["hub_name"]
+
+            if not name.isidentifier():
+                raise ValueError(
+                    f"El nombre {name!r} no es un identificador "
+                    "Python válido. Usa guiones bajos en lugar "
+                    "de guiones."
+                )
+
+            globals()[name] = _make_entrypoint(
+                model, repository_id
+            )
+
+
+_register_models()
