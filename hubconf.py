@@ -41,7 +41,7 @@ def _register_models():
         base_prefix = publisher + str(publication_year)[-2:] + author_initials
 
         for model in repo.get("models", []):
-            name = model["hub_name"]
+            name = base_prefix + "-" + model["hub_alias"]
 
             if not name.isidentifier():
                 raise ValueError(
