@@ -3,7 +3,7 @@ from pathlib import Path as _Path
 import torch as _torch
 import yaml as _yaml
 
-dependencies = ["torch", "pyyaml"]
+dependencies = ["torch"]
 
 _CONFIG_PATH = _Path(__file__).parent / "repositories.yaml"
 
