@@ -1,16 +1,16 @@
 from pathlib import Path as _Path
 
 import torch as _torch
-import yaml
+import yaml as _yaml
 
-dependencies = ["torch"]
+dependencies = ["torch", "pyyaml"]
 
 _CONFIG_PATH = _Path(__file__).parent / "repositories.yaml"
 
 
 def _load_config():
     with _CONFIG_PATH.open(encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+        return _yaml.safe_load(f) or {}
 
 
 def _make_entrypoint(model_config, repository_id):
