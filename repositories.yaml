@@ -3,14 +3,14 @@ repositories:
     repository_description: Encoders for the paper "asd"
     publisher: IEEEAccess
     publication_year: 2026
-    author_id: Gustavo P. C. P. da Luz (GL)
+    author_in_charge: Gustavo P. C. P. da Luz (GL)
     tag: benchmarking-encoders
     title: Benchmarking Encoders and Self-Supervised Learning for Smartphone-Based Human Activity Recognition
     extra_parameters:
     - parameter_name: role
     - parameter_name: head
     models:
-      - hub_name: IEEEAccess26_GL_L_TV_MS
+      - hub_name: LFR_T2V_MS
         entrypoint: lfr_ts2vec_ms
     # - model_id: diet_resnetse5_kh
     # - model_id: diet_resnetse5_uci

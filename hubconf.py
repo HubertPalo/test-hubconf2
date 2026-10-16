@@ -34,6 +34,11 @@ def _register_models():
 
     for repo in config.get("repositories", []):
         repository_id = repo["repository_id"]
+        publisher = repo["publisher"]
+        publication_year = repo["publication_year"]
+        author = repo["author_in_charge"]
+        author_initials = author[author.index("(")+1:author.index(")")]
+        base_prefix = publisher + str(publication_year)[-2:] + author_initials
 
         for model in repo.get("models", []):
             name = model["hub_name"]
