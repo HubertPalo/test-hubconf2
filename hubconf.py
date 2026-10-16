@@ -14,11 +14,10 @@ def _load_config():
 
 
 def _make_entrypoint(model_config, repository_id):
-    def entrypoint(pretrained=True, **kwargs):
+    def entrypoint(**kwargs):
         return _torch.hub.load(
             repository_id,
             model_config["entrypoint"],
-            pretrained=pretrained,
             **kwargs,
         )
 
